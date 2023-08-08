@@ -4,6 +4,7 @@ Defines the BaseModel class.
 """
 import datetime
 import uuid
+import models
 
 
 class BaseModel:
@@ -28,9 +29,13 @@ class BaseModel:
             **kwargs: Additional keyword arguments.
                 The class attributes are set based on these arguments.
         """
+        self.id = str(uuid.uuid4())
+        self.created_at = datetime.datetime.now()
+        self.updated_at = datetime.datetime.now()
         if kwargs:
             new_kwargs = kwargs.copy()
-            new_kwargs.pop("__class__")
+            if "__class__" in new_kwargs:
+                new_kwargs.pop("__class__")
 
             iso_format = "%Y-%m-%dT%H:%M:%S.%f"
 
@@ -43,9 +48,7 @@ class BaseModel:
             for key, value in new_kwargs.items():
                 setattr(self, key, value)
         else:
-            self.id = str(uuid.uuid4())
-            self.created_at = datetime.datetime.now()
-            self.updated_at = datetime.datetime.now()
+            models.storage.new(self)
 
     def __str__(self):
         """
@@ -60,11 +63,14 @@ class BaseModel:
         return f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}"
 
     def save(self):
-        """Saves the object.
+        """
+        Saves the object.
 
         This method assigns the current timestamp to the `updated_at` attribute.
         """
         self.updated_at = datetime.datetime.now()
+        models.storage.save()
+        models.storage.new(self)
 
     def to_dict(self):
         """
@@ -78,7 +84,7 @@ class BaseModel:
         Raises:
             None
         """
-        new_dict = self.__dict__
+        new_dict = self.__dict__.copy()
         new_dict["__class__"] = self.__class__.__name__
         new_dict["updated_at"] = new_dict["updated_at"].isoformat()
         new_dict["created_at"] = new_dict["created_at"].isoformat()
