@@ -29,7 +29,7 @@ class FileStorage:
 
     def new(self, obj):
         """
-        Stores the obj in the __objects dictionary with a key in the format
+        Stores the obj in the `__objects` dictionary with a key in the format
         of '<obj class name>.id'
 
         Args:
@@ -68,6 +68,3 @@ class FileStorage:
                         self.new(class_dict[cls_name](**obj))
         except FileNotFoundError:
             return
-
-
-
