@@ -1,5 +1,5 @@
 # AirBnB clone - The console
-![alt text](https://s3.amazonaws.com/alx-intranet.hbtn.io/uploads/medias/2018/6/65f4a1dd9c51265f49d0.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIARDDGGGOUSBVO6H7D%2F20230809%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20230809T080643Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=ae0a0c8d25decc3028d2f3f37cc14721747036ffd7b90c718d8cb7ff178d899c)
+![hbnb logo](https://i.postimg.cc/8cr4ktnQ/65f4a1dd9c51265f49d0.png)
 
 ## Welcome to the AirBnB clone project!
 Before starting, please read the **AirBnB** concept page. 
@@ -71,7 +71,7 @@ $
 ```
 All tests should also pass in non-interactive mode: `$ echo "python3 -m unittest discover tests" | bash`
 
-![alt text](https://s3.amazonaws.com/alx-intranet.hbtn.io/uploads/medias/2018/6/815046647d23428a14ca.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIARDDGGGOUSBVO6H7D%2F20230809%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20230809T080643Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=023022f10fe6c7b8da4196f533a88c1aa1189f98062b2a8ebe1c6c3dd85f55ce)
+![The console](https://i.postimg.cc/cHGwM0Fj/815046647d23428a14ca.png)
 
 ## Files and Directories
 
