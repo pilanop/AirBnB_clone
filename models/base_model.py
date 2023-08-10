@@ -29,9 +29,6 @@ class BaseModel:
             **kwargs: Additional keyword arguments.
                 The class attributes are set based on these arguments.
         """
-        self.id = str(uuid.uuid4())
-        self.created_at = datetime.datetime.now()
-        self.updated_at = datetime.datetime.now()
         if kwargs:
             new_kwargs = kwargs.copy()
             if "__class__" in new_kwargs:
@@ -48,6 +45,9 @@ class BaseModel:
             for key, value in new_kwargs.items():
                 setattr(self, key, value)
         else:
+            self.id = str(uuid.uuid4())
+            self.created_at = datetime.datetime.now()
+            self.updated_at = datetime.datetime.now()
             models.storage.new(self)
 
     def __str__(self):
