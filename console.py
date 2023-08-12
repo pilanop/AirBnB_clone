@@ -4,7 +4,11 @@ import cmd
 
 
 class HBNBCommand(cmd.Cmd):
-    prompt = "(hbnb)"
+    """HBNBCommand class is a subclass of cmd.Cmd class."""
+    def __init__(self):
+        """Instantiation"""
+        cmd.Cmd.__init__(self)
+        self.prompt = "(hbnb) "
 
     def do_quit(self, arg):
         """Quit command to exit the program"""
