@@ -1,12 +1,13 @@
 #!/usr/bin/python3
 """command line interpreter for HBNB."""
 import cmd
-import json
 from models import storage
 from models.base_model import BaseModel
+from models.user import User
 
 class_dict = {
-    "BaseModel": BaseModel
+    "BaseModel": BaseModel,
+    "User": User
     # insert other classes here
 }
 
