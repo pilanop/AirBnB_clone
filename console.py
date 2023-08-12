@@ -3,15 +3,21 @@
 import cmd
 from models import storage
 from models.base_model import BaseModel
+from models.city import City
+from models.place import Place
 from models.user import User
 from models.state import State
 from models.review import Review
+from models.amenity import Amenity
 
 class_dict = {
     "BaseModel": BaseModel,
     "User": User,
     "State": State,
-    "Review": Review
+    "Review": Review,
+    "City": City,
+    "Place": Place,
+    "Amenity": Amenity
     # insert other classes here
 }
 
