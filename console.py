@@ -1,5 +1,7 @@
+#!/usr/bin/python3
+"""command line interpreter for HBNB."""
 import cmd
-from models.base_model import BaseModel
+
 
 class HBNBCommand(cmd.Cmd):
     prompt = "(hbnb)"
