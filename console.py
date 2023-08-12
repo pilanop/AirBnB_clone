@@ -33,6 +33,8 @@ class HBNBCommand(cmd.Cmd):
             print(new_instance.id)
 
     def do_show(self, arg):
+        """Prints the string representation of an instance based on class and ID
+        """
         arg_list = arg.split()
         if len(arg_list) == 0:
             print("** class name missing **")
@@ -42,15 +44,13 @@ class HBNBCommand(cmd.Cmd):
             print("** instance id missing **")
         elif len(arg_list) == 2:
             found = False
-            with open("file.json", 'r', encoding="utf8") as file:
-                file_data = json.load(file)
-                for val in file_data.values():
-                    if (arg_list[1] == val["id"] and
-                            arg_list[0] == val["__class__"]):
-                        new_instance = class_dict[arg_list[0]](**val)
-                        print(new_instance)
-                        found = True
-                        break
+            all_objects = storage.all()
+            for obj in all_objects.values():
+                if (arg_list[1] == obj.id and
+                        arg_list[0] == obj.__class__.__name__):
+                    print(obj)
+                    found = True
+                    break
             if not found:
                 print("** no instance found **")
 
