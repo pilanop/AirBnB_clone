@@ -75,6 +75,21 @@ class HBNBCommand(cmd.Cmd):
                 storage.save()
 
     def do_all(self, arg):
+        """Prints all string representation of all instances"""
+        arg_list = arg.split()
+
+        if len(arg_list) == 1 and arg_list[0] not in class_dict:
+            print("** class doesn't exist **")
+        elif len(arg_list) == 0:
+            all_objects = storage.all()
+            for obj in all_objects.values():
+                print(obj)
+
+        elif len(arg_list) == 1:
+            all_objects = storage.all()
+            for obj in all_objects.values():
+                if arg_list[0] == obj.__class__.__name__:
+                    print(obj)
 
 
 if __name__ == '__main__':
