@@ -20,7 +20,12 @@ class HBNBCommand(cmd.Cmd):
 
     def do_EOF(self, arg):
         """End-of-File (EOF) signal """
+        print("")
         return True
+    
+    def emptyline(self):
+        """Do nothing upon receiving an empty line."""
+        pass
 
     def do_create(self, arg):
         """Creates a new instance of a given class"""
