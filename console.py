@@ -13,12 +13,12 @@ class_dict = {
 class HBNBCommand(cmd.Cmd):
     prompt = "(hbnb) "
 
-    def do_quit(self, arg):
+    def do_quit(self):
         """Quit command to exit the program"""
         return True
 
-    def do_EOF(self, arg):
-        """End-of-File (EOF) signal """
+    def do_EOF(self):
+        """End-of-File (EOF) signal"""
         return True
 
     def do_create(self, arg):
@@ -73,6 +73,6 @@ class HBNBCommand(cmd.Cmd):
                 storage.new(obj)
                 storage.save()
 
-                
+
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
