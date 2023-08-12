@@ -2,7 +2,6 @@
 """
 Defines the FileStorage class.
 """
-
 import json
 
 
