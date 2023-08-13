@@ -80,5 +80,5 @@ class FileStorage:
                     del obj["__class__"]
                     if cls_name in class_dict:
                         self.new(class_dict[cls_name](**obj))
-        except FileNotFoundError:
-            return
+        except:
+            pass
