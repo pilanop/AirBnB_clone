@@ -3,6 +3,8 @@
 Defines the FileStorage class.
 """
 import json
+import os.path
+
 from models.base_model import BaseModel
 from models.user import User
 from models.state import State
@@ -10,7 +12,6 @@ from models.review import Review
 from models.city import City
 from models.place import Place
 from models.amenity import Amenity
-
 
 class_dict = {
     "BaseModel": BaseModel,
@@ -70,9 +71,7 @@ class FileStorage:
         Reloads the file storage by reading the JSON file and instantiating
         objects.
         """
-
-
-        try:
+        if os.path.exists(self.__file_path):
             with open(self.__file_path, 'r', encoding='utf8') as file:
                 file_data = json.load(file)
                 for obj in file_data.values():
@@ -80,5 +79,3 @@ class FileStorage:
                     del obj["__class__"]
                     if cls_name in class_dict:
                         self.new(class_dict[cls_name](**obj))
-        except:
-            pass
