@@ -33,7 +33,7 @@ class HBNBCommand(cmd.Cmd):
         """End-of-File (EOF) signal """
         print("")
         return True
-    
+
     def emptyline(self):
         """Do nothing upon receiving an empty line."""
         pass
@@ -84,7 +84,7 @@ class HBNBCommand(cmd.Cmd):
             all_objects = storage.all()
             try:
                 all_objects.pop(f"{arg_list[0]}.{arg_list[1]}")
-            except KeyError:
+            except:
                 print("** no instance found **")
             for obj in all_objects.values():
                 storage.new(obj)
