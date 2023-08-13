@@ -66,7 +66,7 @@ class BaseModel:
         """
         Saves the object.
 
-        This method assigns the current timestamp to the `updated_at` attribute.
+        assigns the current timestamp to the `updated_at` attribute.
         """
         self.updated_at = datetime.datetime.now()
         models.storage.save()

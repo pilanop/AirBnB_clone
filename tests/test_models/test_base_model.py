@@ -85,7 +85,8 @@ class Test_Base_Model_From_Dict(unittest.TestCase):
     def test_Base_Model_From_Dict(self):
         """This method tests the BaseModel instance created from a
         dictionary."""
-        self.assertEqual(self.base_model_from_dict.id, self.my_model_dict["id"])
+        self.assertEqual(self.base_model_from_dict.id,
+                         self.my_model_dict["id"])
         self.assertEqual(type(self.base_model_from_dict.created_at),
                          datetime.datetime)
         self.assertEqual(type(self.base_model_from_dict.updated_at),

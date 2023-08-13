@@ -2,6 +2,7 @@
 """Defines the Place class."""
 from models.base_model import BaseModel
 
+
 class Review(BaseModel):
     """
     Represent a review.
