@@ -112,6 +112,13 @@ class HBNBCommand(cmd.Cmd):
     def do_update(self, arg):
         """Updates an instance based on the class name and ID"""
         arg_list = shlex.split(arg)
+        processed_arguments = []
+        for arg in arg_list:
+            try:
+                numeric_value = eval(arg)
+                processed_arguments.append(numeric_value)
+            except (NameError, SyntaxError, ValueError):
+                processed_arguments.append(arg)
         if len(arg_list) == 0:
             print("** class name missing **")
         elif len(arg_list) == 1 and arg_list[0] not in class_dict:
@@ -129,7 +136,7 @@ class HBNBCommand(cmd.Cmd):
                 if (arg_list[1] == obj.id and
                         arg_list[0] == obj.__class__.__name__):
                     dict_obj = obj.to_dict()
-                    dict_obj[arg_list[2]] = arg_list[3]
+                    dict_obj[arg_list[2]] = processed_arguments[3]
                     update_instance = class_dict[arg_list[0]](**dict_obj)
                     update_instance.save()
                     found = True
