@@ -3,6 +3,25 @@
 Defines the FileStorage class.
 """
 import json
+from models.base_model import BaseModel
+from models.user import User
+from models.state import State
+from models.review import Review
+from models.city import City
+from models.place import Place
+from models.amenity import Amenity
+
+
+class_dict = {
+    "BaseModel": BaseModel,
+    "User": User,
+    "State": State,
+    "Review": Review,
+    "City": City,
+    "Place": Place,
+    "Amenity": Amenity
+    # insert other classes here
+}
 
 
 class FileStorage:
@@ -51,23 +70,7 @@ class FileStorage:
         Reloads the file storage by reading the JSON file and instantiating
         objects.
         """
-        from models.base_model import BaseModel
-        from models.user import User
-        from models.state import State
-        from models.review import Review
-        from models.city import City
-        from models.place import Place
-        from models.amenity import Amenity
-        class_dict = {
-            "BaseModel": BaseModel,
-            "User": User,
-            "State": State,
-            "Review": Review,
-            "City": City,
-            "Place": Place,
-            "Amenity": Amenity
-            # insert other classes here
-        }
+
 
         try:
             with open(self.__file_path, 'r', encoding='utf8') as file:
