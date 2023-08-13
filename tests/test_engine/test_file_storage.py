@@ -2,73 +2,88 @@
 """
 Unit tests for the FileStorage class.
 """
-import unittest
-from models.engine.file_storage import FileStorage
-from models.base_model import BaseModel
 import os
+import unittest
+from models.base_model import BaseModel
+from models.engine.file_storage import FileStorage
+from models.user import User
+from models.state import State
+from models.place import Place
+from models.city import City
+from models.amenity import Amenity
+from models.review import Review
 
 
-class FileStorageTestCase(unittest.TestCase):
-    """Tests the FileStorage class"""
+class TestFileStorageInstantiation(unittest.TestCase):
+    """Unit tests for testing instantiation of the FileStorage class."""
+
+    def test_no_args(self):
+        self.assertIsInstance(FileStorage(), FileStorage)
+
+    def test_with_arg(self):
+        with self.assertRaises(TypeError):
+            FileStorage(None)
+
+    def test_file_path_is_private_str(self):
+        self.assertIsInstance(FileStorage._FileStorage__file_path, str)
+
+    def test_objects_is_private_dict(self):
+        self.assertIsInstance(FileStorage._FileStorage__objects, dict)
+
+
+class TestFileStorageMethods(unittest.TestCase):
+    """Unit tests for testing methods of the FileStorage class."""
 
     def setUp(self):
-        """
-        Sets up the tests
-        """
-        self.storage = FileStorage()
+        self.file_storage = FileStorage()
+        self.base_model_instance = BaseModel()
+        self.user_instance = User()
+        self.state_instance = State()
+        self.place_instance = Place()
+        self.city_instance = City()
+        self.amenity_instance = Amenity()
+        self.review_instance = Review()
 
     def tearDown(self):
-        """
-        Deletes the test json file
-        """
         try:
             os.remove("file.json")
         except FileNotFoundError:
             pass
+        FileStorage._FileStorage__objects = {}
 
     def test_all(self):
-        """
-        Tests the `all` method
-        """
-        all_objects = self.storage.all()
-        self.assertIsInstance(all_objects, dict)
+        self.assertIsInstance(self.file_storage.all(), dict)
 
     def test_new(self):
-        """
-        Tests the `new` method
-        """
-        my_model = BaseModel()
-        my_model.name = "My_First_Model"
-        my_model.my_number = 89
-        my_model.save()
-        key = f"BaseModel.{my_model.id}"
-        all_objects = self.storage.all()
-        self.assertIn(key, all_objects.keys())
+        self.file_storage.new(self.base_model_instance)
+        self.assertIn("BaseModel." + self.base_model_instance.id, self.file_storage.all().keys())
 
-    def test_save_reload(self):
-        """
-        Tests the `save` and `reload` methods
-        """
-        my_model = BaseModel()
-        my_model.name = "My_Second_Model"
-        my_model.my_number = 45
-        my_model.save()
+    def test_new_with_args(self):
+        with self.assertRaises(TypeError):
+            self.file_storage.new(BaseModel(), 1)
 
-        key = f"BaseModel.{my_model.id}"
-        all_objects1 = self.storage.all()
-        self.assertIn(key, all_objects1.keys())
+    def test_new_with_None(self):
+        with self.assertRaises(AttributeError):
+            self.file_storage.new(None)
 
-        storage2 = FileStorage()
-        storage2.reload()
+    def test_save(self):
+        self.file_storage.new(self.base_model_instance)
+        self.file_storage.save()
+        with open("file.json", "r") as f:
+            save_text = f.read()
+            self.assertIn("BaseModel." + self.base_model_instance.id, save_text)
 
-        all_objects2 = storage2.all()
-        self.assertIn(key, all_objects2.keys())
+    def test_reload(self):
+        self.file_storage.new(self.base_model_instance)
+        self.file_storage.save()
+        self.file_storage.reload()
+        objects = FileStorage._FileStorage__objects
+        self.assertIn("BaseModel." + self.base_model_instance.id, objects.keys())
 
-        self.assertEqual(len(all_objects1), len(all_objects2))
-
-        self.assertEqual(my_model.name, all_objects2[key].name)
-        self.assertEqual(my_model.my_number, all_objects2[key].my_number)
+    def test_reload_with_arg(self):
+        with self.assertRaises(TypeError):
+            self.file_storage.reload(None)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()
