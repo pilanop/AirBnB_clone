@@ -100,14 +100,14 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
         elif len(arg_list) == 0:
             all_objects = storage.all()
-            for obj in all_objects.values():
-                print(obj)
+            obj_list = [str(obj) for obj in all_objects.values()]
+            print(obj_list)
 
         elif len(arg_list) == 1:
             all_objects = storage.all()
-            for obj in all_objects.values():
-                if arg_list[0] == obj.__class__.__name__:
-                    print(obj)
+            obj_list = [str(obj) for obj in all_objects.values()
+                        if arg_list[0] == obj.__class__.__name__]
+            print(obj_list)
 
     def do_update(self, arg):
         """Updates an instance based on the class name and ID"""
